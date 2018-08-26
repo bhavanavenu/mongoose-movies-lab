@@ -1,19 +1,44 @@
 const mongoose = require('mongoose');
-const celebrity = require('../models/celebrity');
+const Celebrity = require('../models/celebrity');
 
-
-let celebToCreate = celebrity.map(cel => {
-    return {
-        name : req.body.name,
-        occupation: req.body.occupation,
-        catchPhrase : req.body.catchPhrase
-    }
+mongoose.Promise = Promise;
+mongoose
+  .connect(
+    "mongodb://localhost/mongoose-movies-daily-exercise",
+    { useMongoClient: true }
+  )
+  .then(() => {
+    console.log("Connected to Mongo!");
+  })
+  .catch(err => {
+    console.error("Error connecting to mongo", err);
   });
-  
-  return User.create(usersToCreate)
 
+let celebrities = [
+  {
+    name: "Bruno Mars",
+    occupation: "Musician",
+    catchphrase: "You cant knock on opportunitys door and not be ready"
+  },
+  {
+    name: "Shakira",
+    occupation: "Musician",
+    catchphrase: "hips dont lie"
+  },
+  {
+    name: "Britney Spears",
+    occupation: "Musician",
+    catchphrase: "I know you"
+  }
+];
 
-.then(usersFromDb => {
-  console.log(usersFromDb.length + " users were created");
-  console.log("The id of the first user is", usersFromDb[0]._id);
-})
+Celebrity.deleteMany().then(x => {
+  Celebrity.create(celebrities)
+    .then(celeb => {
+      console.log(
+        celeb.length,
+        "celebrities were created"
+      );
+    })
+    .catch(err => console.log("could not be created"));
+});
