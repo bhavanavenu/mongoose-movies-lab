@@ -1,0 +1,10 @@
+<h2>Welcome to the Movies Page</h2>
+
+<ul>
+  {{#each movies}}
+  <a href="/movies/{{this.id}}"><li>
+{{this.name}}
+<a class="btn btn-primary" href="/movies/{{id}}/edit">Edit celebrity</a>
+<a class="btn btn-danger" href="/movies/{{id}}/delete">Delete celebrity</a>
+    </li></a>
+    {{/each}}

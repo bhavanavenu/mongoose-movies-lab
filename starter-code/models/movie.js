@@ -7,6 +7,6 @@ const MovieSchema = new Schema({
   plot: String
 });
 
-const MovieModel = mongoose.model("MovieModel", MovieSchema);
+const Movie = mongoose.model("Movie", MovieSchema);
 
-module.exports = MovieModel;
+module.exports = Movie;
